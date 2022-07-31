@@ -1,9 +1,11 @@
 package pl.her.spring.course;
 
+import java.util.List;
+
 public class MusicPlayer {
 
   private String city;
-  private Music music;
+  private List<Music> music;
   private String name;
   private int volume;
 
@@ -35,19 +37,20 @@ public class MusicPlayer {
   }
 
   //Ioc
-  public MusicPlayer(Music music) {
+  public MusicPlayer(List<Music> music) {
     this.music = music;
   }
 
-  public void setMusic(Music music) {
+  public void setMusic(List<Music> music) {
     this.music = music;
   }
 
   public void playMusic() {
     System.out.println(
-        String.format("band %s is playing song %s with volume %s. Band is from %s", getName(),
-            music.getSong(),
+        String.format("band %s is playing songs with volume %s. Band is from %s", getName(),
             getVolume(), getCity()));
+    music.forEach(s -> System.out.println("Band plays: " + s.getSong()));
+
   }
 
 }

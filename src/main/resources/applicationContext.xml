@@ -2,20 +2,34 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:util="http://www.w3.org/2001/XMLSchema"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-<!--  wczytywanie dodatkowego pliku properties ktory ma 'city'-->
-<context:property-placeholder location="classpath:musicPlayer.properties"/>
+  <!--  wczytywanie dodatkowego pliku properties ktory ma 'city'-->
+  <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-  <bean id="musicBean"
+  <bean id="musicBean1"
     class="pl.her.spring.course.RockMusic">
   </bean>
+  <bean id="musicBean2"
+    class="pl.her.spring.course.ClassicalMusic">
+  </bean>
+
+  <bean id="musicSet" class="java.util.ArrayList">
+    <constructor-arg>
+      <list>
+        <ref bean="musicBean1"/>
+        <ref bean="musicBean2"/>
+      </list>
+    </constructor-arg>
+  </bean>
+
   <bean id="musicPlayer"
     class="pl.her.spring.course.MusicPlayer">
-    <property name="music" ref="musicBean"/>
+    <property name="music" ref="musicSet"/>
     <!--    <constructor-arg ref="musicBean"/>-->
     <!--   using setter above, we should have 0-arg constructor-->
     <property name="volume" value="10"/>
