@@ -28,7 +28,8 @@
   </bean>
 
   <bean id="musicPlayer"
-    class="pl.her.spring.course.MusicPlayer">
+    class="pl.her.spring.course.MusicPlayer"
+    scope="prototype">
     <property name="music" ref="musicSet"/>
     <!--    <constructor-arg ref="musicBean"/>-->
     <!--   using setter above, we should have 0-arg constructor-->
