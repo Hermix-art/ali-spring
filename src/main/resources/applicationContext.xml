@@ -10,5 +10,9 @@
   <bean id="musicBean"
     class="pl.her.spring.course.RockMusic">
   </bean>
+  <bean id="musicPlayer"
+    class="pl.her.spring.course.MusicPlayer">
+    <constructor-arg ref="musicBean"/>
+  </bean>
 
 </beans>
