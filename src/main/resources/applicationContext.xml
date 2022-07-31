@@ -7,12 +7,20 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+<!--  wczytywanie dodatkowego pliku properties ktory ma 'city'-->
+<context:property-placeholder location="classpath:musicPlayer.properties"/>
+
   <bean id="musicBean"
     class="pl.her.spring.course.RockMusic">
   </bean>
   <bean id="musicPlayer"
     class="pl.her.spring.course.MusicPlayer">
-    <constructor-arg ref="musicBean"/>
+    <property name="music" ref="musicBean"/>
+    <!--    <constructor-arg ref="musicBean"/>-->
+    <!--   using setter above, we should have 0-arg constructor-->
+    <property name="volume" value="10"/>
+    <property name="name" value="the NPC"/>
+    <property name="city" value="${musicPlayer.city}"/>
   </bean>
 
 </beans>
