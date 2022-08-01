@@ -15,7 +15,8 @@
     class="pl.her.spring.course.RockMusic"
     init-method="doMyInit"
     destroy-method="doMyDestroy"
-    scope="prototype">
+    factory-method="createRockMusic">
+<!--  scope="prototype"-->
   </bean>
   <!--  <bean id="musicBean2"-->
   <!--    class="pl.her.spring.course.ClassicalMusic">-->
