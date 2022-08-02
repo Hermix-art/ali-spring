@@ -6,15 +6,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MusicPlayer {
-
-    @Autowired
-    @Qualifier("someRockMusic")
     private Music music;
 
-//    @Autowired
-//    public MusicPlayer(Music music) {
-//        this.music = music;
-//}
+    @Autowired
+    public MusicPlayer(@Qualifier("someRockMusic") Music music) {
+        this.music = music;
+}
 
     public String playMusic() {
         return String.format("Playing the music %s", music.getSong());
