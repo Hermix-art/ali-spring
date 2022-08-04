@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component("someClassicalMusic")
-@Scope("singleton")
+@Scope("prototype")
 public class ClassicalMusic implements Music {
 
     @Override
