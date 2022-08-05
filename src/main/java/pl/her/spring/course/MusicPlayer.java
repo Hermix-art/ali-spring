@@ -3,9 +3,11 @@ package pl.her.spring.course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
+@PropertySource("classpath:musicPlayer.properties")
 public class MusicPlayer {
 
     private Music music;
@@ -23,7 +25,7 @@ public class MusicPlayer {
     }
 
     @Autowired
-    public MusicPlayer(@Qualifier("someRockMusic") Music music) {
+    public MusicPlayer(@Qualifier("rockMusic") Music music) {
         this.music = music;
     }
 

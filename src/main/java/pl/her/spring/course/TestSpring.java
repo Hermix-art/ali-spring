@@ -1,24 +1,25 @@
 package pl.her.spring.course;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class TestSpring {
 
     public static void main(String[] args) {
-        // iddzie do xml i zczytuje beany ztamtad
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContext.xml");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         Computer computer = context.getBean("computer", Computer.class);
         System.out.println(computer);
+        System.out.println("=====================");
 
-        MusicPlayer player = context.getBean("musicPlayer", MusicPlayer.class);
-        System.out.println(player.getName());
-        System.out.println(player.getVolume());
+        MusicPlayer player1 = context.getBean("musicPlayer", MusicPlayer.class);
+        System.out.println(player1.playMusic());
+        System.out.println("=====================");
 
-        ClassicalMusic classicalMusic = context.getBean("someClassicalMusic", ClassicalMusic.class);
-        ClassicalMusic classicalMusic2  = context.getBean("someClassicalMusic", ClassicalMusic.class);
-        System.out.println(classicalMusic);
-        System.out.println(classicalMusic2);
+        // as classicalMusic is a singleton, initial method won't be called one more time, but destroy method will be called
+        Music classicalMusic = context.getBean("classicalMusic", ClassicalMusic.class);
+
+        //as rockmusic is a prototype - initial method will be called 2nd time, and no pre-destroy method will be called
+        Music rockMusic = context.getBean("rockMusic", RockMusic.class);
+
         context.close();
     }
 }

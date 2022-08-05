@@ -20,6 +20,6 @@ public class Computer {
 
     @Override
     public String toString() {
-        return "id is: " + id + " \n" + musicPlayer.playMusic();
+        return "\nid is: " + id + " \n" + musicPlayer.playMusic();
     }
 }
