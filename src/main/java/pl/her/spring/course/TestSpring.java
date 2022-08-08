@@ -1,18 +1,15 @@
 package pl.her.spring.course;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class TestSpring {
 
   public static void main(String[] args) {
     // iddzie do xml i zczytuje beany ztamtad
-    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-        "applicationContext.xml");
-    Music rockMusic = context.getBean("someRockMusic", RockMusic.class);
-    Music classicalMusic = context.getBean("someClassicalMusic", ClassicalMusic.class);
-    System.out.println(rockMusic.getSong());
-    System.out.println(classicalMusic.getSong());
-
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MusicConfig.class);
+    MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+    musicPlayer.playMusic();
     context.close();
+
   }
 }

@@ -1,56 +1,30 @@
 package pl.her.spring.course;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
+@PropertySource("music.properties")
+@Component("musicPlayer")
 public class MusicPlayer {
 
-  private String city;
-  private List<Music> music;
-  private String name;
-  private int volume;
+  @Value("${music.volume}")
+  private String volume;
+  private final Music classicalMusic;
+  private final Music rockMusic;
 
-  public String getCity() {
-    return city;
-  }
-
-  public void setCity(String city) {
-    this.city = city;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public int getVolume() {
-    return volume;
-  }
-
-  public void setVolume(int volume) {
-    this.volume = volume;
-  }
-
-  public MusicPlayer() {
-  }
-
-  //Ioc
-  public MusicPlayer(List<Music> music) {
-    this.music = music;
-  }
-
-  public void setMusic(List<Music> music) {
-    this.music = music;
+  @Autowired
+  public MusicPlayer(@Qualifier("classicalMusic") Music classicalMusic,
+      @Qualifier("rockMusic") Music rockMusic) {
+    this.classicalMusic = classicalMusic;
+    this.rockMusic = rockMusic;
   }
 
   public void playMusic() {
-    System.out.println(
-        String.format("band %s is playing songs with volume %s. Band is from %s", getName(),
-            getVolume(), getCity()));
-    music.forEach(s -> System.out.println("Band plays: " + s.getSong()));
-
+    System.out.printf("playing %s and %s music, with volume %s", classicalMusic.getSong(),
+        rockMusic.getSong(), volume);
   }
 
 }
