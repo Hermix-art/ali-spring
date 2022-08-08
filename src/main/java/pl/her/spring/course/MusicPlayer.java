@@ -1,30 +1,27 @@
 package pl.her.spring.course;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
-@PropertySource("music.properties")
-@Component("musicPlayer")
 public class MusicPlayer {
 
-  @Value("${music.volume}")
+  private final Random random;
+  @Value("${musicPlayer.volume}")
   private String volume;
-  private final Music classicalMusic;
-  private final Music rockMusic;
+  private List<Music> musicList;
 
-  @Autowired
-  public MusicPlayer(@Qualifier("classicalMusic") Music classicalMusic,
-      @Qualifier("rockMusic") Music rockMusic) {
-    this.classicalMusic = classicalMusic;
-    this.rockMusic = rockMusic;
+  public MusicPlayer(List<Music> musicList) {
+    this.musicList = musicList;
+    this.random = new Random();
   }
 
   public void playMusic() {
-    System.out.printf("playing %s and %s music, with volume %s", classicalMusic.getSong(),
-        rockMusic.getSong(), volume);
+    System.out.printf("player plays %s music with volume %s", getRandomSong(), volume);
+  }
+
+  private String getRandomSong() {
+    return musicList.get(random.nextInt(musicList.size())).getSong();
   }
 
 }

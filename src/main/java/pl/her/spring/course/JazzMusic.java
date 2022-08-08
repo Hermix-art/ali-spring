@@ -1,11 +1,9 @@
 package pl.her.spring.course;
 
-
-public class RockMusic implements Music {
+public class JazzMusic implements Music{
 
   @Override
   public String getSong() {
-    return "Wind cries Mary";
+    return "Miles Davis song ...";
   }
-
 }
